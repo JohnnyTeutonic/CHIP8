@@ -19,6 +19,7 @@ public:
     Game(ChipEight * interpreter);
     void InitContext();
     void GameLoop();
+    void DrawRandom();
 
 };
 
