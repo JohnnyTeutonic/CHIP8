@@ -10,5 +10,6 @@ private:
 public:
     Renderer();
     void InitContext();
+    void GameLoop();
 
 };

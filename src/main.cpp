@@ -10,6 +10,7 @@ int main(void)
     //Instantiate our emuRenderer on the stack, and open a window.
     Renderer emuRenderer;
     emuRenderer.InitContext();
+    emuRenderer.GameLoop();
 
     return 0;
 }
