@@ -1,8 +1,13 @@
 #include "renderer.h"
+#include "chipeight.h"
 
 int main(void)
 {
-    //Create a renderer on the stack - no need for pointer here.
+
+    //Instantiate our ChipEight object on the stack, with true verbosity.
+    ChipEight interpreter(true);
+
+    //Instantiate our emuRenderer on the stack, and open a window.
     Renderer emuRenderer;
     emuRenderer.InitContext();
 
