@@ -1,3 +1,6 @@
+#ifndef CHIPEIGHT_H
+#define CHIPEIGHT_H
+
 class ChipEight
 {
 public:
@@ -43,3 +46,5 @@ private:
     //Private default constructor, might change in the future but we at least want to start the interpreter with some verbosity (true or false).
     ChipEight();
 };
+
+#endif

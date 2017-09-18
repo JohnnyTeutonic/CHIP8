@@ -1,8 +1,11 @@
 #include <stdexcept>
-#include "renderer.h"
+#include "game.h"
 
-Renderer::Renderer()
+Game::Game(ChipEight * interpreter)
 {
+    //Assign our chipeight variable to one that has already been created.
+    this->interpreter = interpreter;
+
     /* Initialize the library */
     if (!glfwInit())
         throw std::runtime_error("glfw could not initialize."); //TODO: Custom Exception
@@ -16,13 +19,13 @@ Renderer::Renderer()
     }
 }
 
-void Renderer::InitContext()
+void Game::InitContext()
 {
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
 }
 
-void Renderer::GameLoop()
+void Game::GameLoop()
 {
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
