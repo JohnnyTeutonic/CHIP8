@@ -1,5 +1,5 @@
 # This is the CMakeLists.txt for the CHIP8 project, which will assist in building and compiling the project on all platforms.
-cmake_minimum_required (VERSION 2.6)
+cmake_minimum_required (VERSION 2.8.4)
 project(CHIP8)
 
 # To maintain a clean tree, set some useful variables so we're not building everything in root.
