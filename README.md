@@ -19,3 +19,29 @@ and to run the project (relative to the new build folder we made):
 
 # Unit Testing
 ...
+
+
+
+# Coding Style
+
+To maintain a consistent codebase, use the following style when formatting your code:
+
+* __Classes:__ `UpperCase`
+* __Methods:__ `UpperCase`
+* __Instance Variables:__ `lowerCase`
+* __Class(static) Variables:__ `lowerCase`
+* __Constants:__ `UNDER_SCORE_CAPS`
+
+# Commenting style:
+* __File Comments:__  Block Comments `/** ... */` , detailing:
+    * file name (e.g. main.cpp),
+    * `@author` 
+    * `@version`
+    * license
+    * optional description
+* __Function Comments:__ Block Comments `/** ... */` , detailing:
+    * purpose, 
+    * `@param`
+    * `@return`
+* __Code Comments:__ Use the double slash style `//` for all other comments. 
+    * Try not to over-comment, only comment when the code can't describe itself.
