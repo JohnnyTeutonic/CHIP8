@@ -1,3 +1,10 @@
+/**
+chipeight.h
+@author: Kevin Mallinson
+@version: 0.1
+@license: GNU/GPL 2.0
+*/
+
 #ifndef CHIPEIGHT_H
 #define CHIPEIGHT_H
 

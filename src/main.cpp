@@ -1,3 +1,10 @@
+/**
+main.cpp
+@author: Kevin Mallinson
+@version: 0.1
+@license: GNU/GPL 2.0
+*/
+
 #include "game.h"
 #include "chipeight.h"
 
