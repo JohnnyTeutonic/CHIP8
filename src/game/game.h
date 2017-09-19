@@ -18,6 +18,8 @@ class Game
 private:
     GLFWwindow * window;
     ChipEight * interpreter; 
+    int width, height;
+    float ratio;
 
     //Private unused constructor
     Game();
@@ -26,7 +28,7 @@ public:
     Game(ChipEight * interpreter);
     void InitContext();
     void GameLoop();
-    void DrawRandom();
+    void DrawSquare();
 
 };
 

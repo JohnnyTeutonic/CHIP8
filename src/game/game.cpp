@@ -10,66 +10,65 @@ game.cpp
 
 Game::Game(ChipEight * interpreter)
 {
-    //Assign our chipeight variable to one that has already been created.
     this->interpreter = interpreter;
 
-    /* Initialize the library */
     if (!glfwInit())
+    {
         throw std::runtime_error("glfw could not initialize."); //TODO: Custom Exception
+    }
 
-    /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
-    if (!window)
+    if (!(window = glfwCreateWindow(640, 480, "ChipEight Interpreter", NULL, NULL)))
     {
         glfwTerminate();
         throw std::runtime_error("glfw could not create a window."); //TODO: Custom Exception
     }
 
-    glfwSetWindowTitle(window, "ChipEight Interpreter");
+    //We use a reference because we're setting width and height.
+    glfwGetFramebufferSize(window, &this->width, &this->height);
+    this->ratio = this->width / (float) this->height;
+    glViewport(0, 0, width, height);
 }
 
 void Game::InitContext()
 {
-    /* Make the window's context current */
+    //We need to specify that our context is current - that is to say,
+    //all drawing, setting, etc, will happen on the 'window' context.
     glfwMakeContextCurrent(window);
-}
-
-//EVERYTHING IN THIS METHOD WILL BE REMOVED. ITS FOR DEBUG ONLY.
-void Game::DrawRandom()
-{
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-
-    //Slightly randomize a certain variable to show it's not frozen.
-    float random = -1+2*((float)rand())/RAND_MAX;
-
-    glBegin(GL_QUADS);
-    glColor3f(1.0f, 0.0f, 0.0f);
-    glVertex2f(random, random);
-    glVertex2f( 0.1f, random);
-    glVertex2f( 0.1f,  0.1f);
-    glVertex2f(random,  0.1f);
-    glEnd();
-  
-    glFlush();  // Render now
 }
 
 void Game::GameLoop()
 {
-    /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
-        /* Render here */
         glClear(GL_COLOR_BUFFER_BIT);
+        
+        this->DrawSquare();
 
-        //Just draw a shape in random locations for testing.
-        this->DrawRandom();
-
-        /* Swap front and back buffers */
         glfwSwapBuffers(window);
-
-        /* Poll for and process events */
         glfwPollEvents();
     }
 
+    glfwDestroyWindow(window);
     glfwTerminate();
+}
+
+void Game::DrawSquare()
+{
+    //This method merely calls LoadIdentity, otherwise the rotate won't work correctly.
+    //Then, we build a quad (square) using four points, and in between change its colour.
+    //The result, is a rotating square. This is merely to test that our program hasn't hanged,
+    //and to assist in creating our Chip8 'sprites' later.
+
+    glLoadIdentity();
+    glRotatef((float) glfwGetTime() * 25.f, 0.f, 0.f, 1.f);
+    glBegin(GL_QUADS);
+    glColor3f(1.f, 0.f, 0.f);
+    glVertex2f(-0.5f, 0.5f);
+    glColor3f(1.f, 1.f, 0.f);
+    glVertex2f(-0.5f, -0.5f);
+    glColor3f(0.f, 1.f, 1.f);
+    glVertex2f(0.5f, -0.5f);
+    glColor3f(0.f, 0.f, 1.f);
+    glVertex2f(0.5f, 0.5f);
+    glEnd();
 }
