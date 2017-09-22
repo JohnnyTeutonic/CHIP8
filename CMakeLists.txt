@@ -7,6 +7,23 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
+
+# Below is for building GLFW from source, depending on platform.
+if (CYGWIN OR WIN32)
+    set(BUILDFORWINDOWS 1)
+endif (CYGWIN OR WIN32)
+
+if (BUILDFORWINDOWS)
+    message("We're on Windows. Compiling GLFW for Windows using WIN32.")
+
+
+elseif (UNIX)
+    message("We're on Linux or Mac. Compiling GLFW for *nix using x11.")
+
+    
+endif (BUILDFORWINDOWS)
+
+
 # Here we will find all our 3rd party libraries which are dependencies.
 find_package(OpenGL REQUIRED)
 find_package(glfw3 REQUIRED)
