@@ -13,8 +13,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin) # executables
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "Build the GLFW example programs")
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "Build the GLFW test programs")
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "Build the GLFW documentation")
-add_subdirectory(${CMAKE_SOURCE_DIR}/lib/GLFW)
-include_directories(${CMAKE_SOURCE_DIR}/lib/GLFW/include)
+add_subdirectory(${CMAKE_SOURCE_DIR}/dep/GLFW)
+include_directories(${CMAKE_SOURCE_DIR}/dep/GLFW/include)
 
 # Include all other libraries.
 find_package(OpenGL REQUIRED)
