@@ -1,34 +1,25 @@
-# This is the CMakeLists.txt for the CHIP8 project, which will assist in building and compiling the project on all platforms.
-cmake_minimum_required (VERSION 2.8.4)
+# Unfortunately, GLFW is not CYGWIN aware - so we'll set a legacy flag. As such, WIN32 will now be defined.
+# This means we can't upgrade CMAKE minimum version past 2.8.3 until/unless GLFW is updated to be CYGWIN aware.
+cmake_minimum_required(VERSION 2.8.3)
+set(CMAKE_LEGACY_CYGWIN_WIN32 1)
 project(CHIP8)
 
 # To maintain a clean tree, set some useful variables so we're not building everything in root.
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib) # static library
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib) # dynamic library
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin) # executables
 
+# Include the GLFW source, and set some flags, which will instruct cmake to perform instructions as per its CMakeLists.txt (and our custom flags).
+set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "Build the GLFW example programs")
+set(GLFW_BUILD_TESTS OFF CACHE BOOL "Build the GLFW test programs")
+set(GLFW_BUILD_DOCS OFF CACHE BOOL "Build the GLFW documentation")
+add_subdirectory(${CMAKE_SOURCE_DIR}/lib/GLFW)
+include_directories(${CMAKE_SOURCE_DIR}/lib/GLFW/include)
 
-# Below is for building GLFW from source, depending on platform.
-if (CYGWIN OR WIN32)
-    set(BUILDFORWINDOWS 1)
-endif (CYGWIN OR WIN32)
-
-if (BUILDFORWINDOWS)
-    message("We're on Windows. Compiling GLFW for Windows using WIN32.")
-
-
-elseif (UNIX)
-    message("We're on Linux or Mac. Compiling GLFW for *nix using x11.")
-
-    
-endif (BUILDFORWINDOWS)
-
-
-# Here we will find all our 3rd party libraries which are dependencies.
+# Include all other libraries.
 find_package(OpenGL REQUIRED)
-find_package(glfw3 REQUIRED)
 
-# Add our own dirs.
+# Add our own source code directories.
 include_directories(${CMAKE_SOURCE_DIR}/src/game)
 include_directories(${CMAKE_SOURCE_DIR}/src/chipeight)
 
@@ -42,4 +33,15 @@ add_executable(CHIP8
 )
 
 # Here we will link those previously found libraries so we can use them.
-target_link_libraries(CHIP8 OpenGL glfw)
+target_link_libraries(CHIP8 
+    ${OPENGL_LIBRARIES} 
+    glfw 
+    ${GLFW_LIBRARIES}
+)
+
+# Some libraries need to be specifically linked if we're running Windows.
+if (WIN32)
+    target_link_libraries(CHIP8 
+        gdi32
+    )
+endif (WIN32)
