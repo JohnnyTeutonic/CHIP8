@@ -27,7 +27,7 @@
 int main(void)
 {
 
-    //Instantiate our ChipEight object on the stack, with true verbosity.
+    //Instantiate our ChipEight object on the heap via a pointer, with true (verbosity).
     ChipEight * interpreter = new ChipEight(true);
 
     //Instantiate our emuRenderer on the stack, and open a window.

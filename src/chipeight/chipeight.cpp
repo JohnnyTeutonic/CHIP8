@@ -40,7 +40,7 @@ void ChipEight::ParseOpcode()
     uint16_t opcode = 0xFFFF;
 
     //Only consider the first half-byte (nibble), so AND the opcode with F000 to disregard the remaining 12 bits.
-    uint16_t opNibble = opcode & 0x0FFF;
+    uint16_t opNibble = opcode & 0xF000;
 
     //TODO: Implement the switch.
     switch(opNibble)
