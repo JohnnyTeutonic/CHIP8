@@ -24,7 +24,7 @@
 #include "game.h"
 #include "chipeight.h"
 
-int main(void)
+int main(int argc, char * argv[])
 {
 
     //Instantiate our ChipEight object on the heap via a pointer, with true (verbosity).
