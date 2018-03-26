@@ -24,6 +24,8 @@
 #ifndef CHIPEIGHT_H
 #define CHIPEIGHT_H
 
+ #include <stdint.h>
+
 class ChipEight
 {
 public:
