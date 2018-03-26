@@ -17,6 +17,12 @@ and to run the project (relative to the new build folder we made):
 ./bin/CHIP8
 ```
 
+# Dependencies
+Make sure you have installed:
+* libx11-dev
+* xorg-dev
+* libglu1-mesa-dev
+
 # Unit Testing
 ...
 
