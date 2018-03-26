@@ -16,6 +16,9 @@ set(GLFW_BUILD_DOCS OFF CACHE BOOL "Build the GLFW documentation")
 add_subdirectory(${CMAKE_SOURCE_DIR}/dep/GLFW)
 include_directories(${CMAKE_SOURCE_DIR}/dep/GLFW/include)
 
+# Add our test directory
+add_subdirectory (test)
+
 # Include all other libraries.
 find_package(OpenGL REQUIRED)
 
@@ -30,6 +33,7 @@ add_executable(CHIP8
     ${CMAKE_SOURCE_DIR}/src/game/game.cpp
     ${CMAKE_SOURCE_DIR}/src/chipeight/chipeight.cpp
     ${CMAKE_SOURCE_DIR}/src/chipeight/chipeight.cpp
+    ${CMAKE_SOURCE_DIR}/src/factorial.cpp
 )
 
 # Here we will link those previously found libraries so we can use them.
