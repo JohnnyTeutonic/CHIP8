@@ -1,5 +1,6 @@
 language: cpp
-install: true
+install: 
+  - sudo apt-get install xorg-dev
 script:
   - mkdir build
   - cd build
