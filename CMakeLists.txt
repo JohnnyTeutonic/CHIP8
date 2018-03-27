@@ -1,7 +1,8 @@
 # Unfortunately, GLFW is not CYGWIN aware - so we'll set a legacy flag. As such, WIN32 will now be defined.
 # This means we can't upgrade CMAKE minimum version past 2.8.3 until/unless GLFW is updated to be CYGWIN aware.
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.9.1)
 set(CMAKE_LEGACY_CYGWIN_WIN32 1)
+set (CMAKE_CXX_STANDARD 11) # Set C++11
 project(CHIP8)
 
 # To maintain a clean tree, set some useful variables so we're not building everything in root.

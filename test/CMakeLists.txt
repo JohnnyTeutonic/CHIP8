@@ -1,4 +1,5 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.9.1)
+set (CMAKE_CXX_STANDARD 11) # Set C++11
 set(CMAKE_LEGACY_CYGWIN_WIN32 1)
 
 PROJECT(CHIP8TESTS)
