@@ -1,7 +1,20 @@
 language: cpp
 sudo: required
 dist: trusty
-compiler: clang
+matrix:
+  include:
+    # works on Precise and Trusty
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-7
+      env:
+        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+before_install:
+    - eval "${MATRIX_EVAL}"
 install: 
   - sudo apt-get install xorg-dev
 script:
@@ -10,4 +23,4 @@ script:
   - cmake ..
   - make
   - cd ./bin
-  - ./TESTS
+  - ./tests
