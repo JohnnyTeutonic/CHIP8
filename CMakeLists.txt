@@ -32,9 +32,8 @@ add_executable(CHIP8
     ${CMAKE_SOURCE_DIR}/src/main.cpp
     ${CMAKE_SOURCE_DIR}/src/game/game.h
     ${CMAKE_SOURCE_DIR}/src/game/game.cpp
+    ${CMAKE_SOURCE_DIR}/src/chipeight/chipeight.h
     ${CMAKE_SOURCE_DIR}/src/chipeight/chipeight.cpp
-    ${CMAKE_SOURCE_DIR}/src/chipeight/chipeight.cpp
-    ${CMAKE_SOURCE_DIR}/src/factorial.cpp
 )
 
 # Here we will link those previously found libraries so we can use them.

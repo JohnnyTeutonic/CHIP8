@@ -20,16 +20,46 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
-
 #ifndef CHIPEIGHT_H
 #define CHIPEIGHT_H
 
- #include <stdint.h>
+#include <stdint.h>
+
+#define DISPLAY_WIDTH 64
+#define DISPLAY_HEIGHT 32
+
+
+//The chip8 supports a 64x32 pixel display - and from what I've read a single byte is used to represent a sprite.
+//(A single sprite is 8 pixels wide)
+struct CHDisplay
+{
+    int width = DISPLAY_WIDTH;
+    int height = DISPLAY_HEIGHT;
+    uint8_t display[DISPLAY_WIDTH][DISPLAY_HEIGHT];
+};
 
 class ChipEight
 {
 public:
     ChipEight(bool verbose);
+
+    void ClearScreen_00E0();
+
+    CHDisplay GetDisplay();
+
+    //This inline function is just for testing. Remove later.
+    //It merely fills the entire screen with white pixels.
+    void FillEntireScreen() 
+    {
+        for(int i = 0; i < this->display.width; i++)
+        {
+            for(int j = 0; j < this->display.height; j++)
+            {
+                this->display.display[i][j] = 1;
+            }
+        }
+    }
+
 
 private:
     //This bool will be used to verbosely document what's going on - that is, it will explain each opcode as it reads it.
@@ -61,7 +91,7 @@ private:
 
     //The chip8 supports a 64x32 pixel display - and from what I've read a single byte is used to represent a sprite.
     //(A single sprite is 8 pixels wide)
-    uint8_t display[64][32];
+    CHDisplay display;
 
     //Since we only have 35 opcodes, we're going to 'fudge' it by wrapping the parsing in a switch statement.
     //If we were working on e.g. the Intel 8080, this would be pretty messy and we might want to consider something like function pointers instead.

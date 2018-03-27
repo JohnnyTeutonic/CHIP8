@@ -48,3 +48,20 @@ void ChipEight::ParseOpcode()
 
     }
 }
+
+void ChipEight::ClearScreen_00E0()
+{
+    for(int i = 0; i < DISPLAY_WIDTH; i++)
+    {
+        for(int j = 0; j < DISPLAY_HEIGHT; j++)
+        {
+            //A 1 indicates a sprite (a solid square), therefore a 0 indicates an absense of a sprite
+            this->display.display[i][j] = 0;
+        }
+    }
+}
+
+CHDisplay ChipEight::GetDisplay()
+{
+    return this->display;
+}
