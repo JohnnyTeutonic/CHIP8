@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/KiloMikeCodesStuff/CHIP8.svg?branch=master)](https://travis-ci.org/KiloMikeCodesStuff/CHIP8)
+
+
 # Introduction
 This project serves as a CHIP-8 emulator/interpreter.
 The aim of this project is to introduce myself, and anyone following, to systems emulation.
