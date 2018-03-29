@@ -22,6 +22,7 @@
 */
 
 #include <stdexcept>
+#include <cstdlib>
 #include "game.h"
 
 Game::Game(ChipEight * interpreter)
@@ -33,7 +34,10 @@ Game::Game(ChipEight * interpreter)
         throw std::runtime_error("glfw could not initialize."); //TODO: Custom Exception
     }
 
-    if (!(window = glfwCreateWindow(640, 480, "ChipEight Interpreter", NULL, NULL)))
+    this->width = 1344; // 64 * 21
+    this->height = 672; // 32 * 21
+
+    if (!(window = glfwCreateWindow(width, height, "ChipEight Interpreter", NULL, NULL)))
     {
         glfwTerminate();
         throw std::runtime_error("glfw could not create a window."); //TODO: Custom Exception
@@ -54,11 +58,15 @@ void Game::InitContext()
 
 void Game::GameLoop()
 {
+    //For testing only
+    srand (time(NULL));
+
     while (!glfwWindowShouldClose(window))
     {
         glClear(GL_COLOR_BUFFER_BIT);
         
-        this->DrawSquare();
+        //For testing only
+        this->DrawSprite(rand() % 64 + 1, rand() % 32 + 1);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
@@ -68,23 +76,33 @@ void Game::GameLoop()
     glfwTerminate();
 }
 
-void Game::DrawSquare()
-{
-    //This method merely calls LoadIdentity, otherwise the rotate won't work correctly.
-    //Then, we build a quad (square) using four points, and in between change its colour.
-    //The result, is a rotating square. This is merely to test that our program hasn't hanged,
-    //and to assist in creating our Chip8 'sprites' later.
+    void Game::DrawSprite(int x, int y)
+    {
+        //ASSUMPTION: We want it ONE indexed, not ZERO indexed
+        //TODO: Verify this assumption
+        if (x != 0)
+            x--;
+        if (y != 0)
+            y--;
 
-    glLoadIdentity();
-    glRotatef((float) glfwGetTime() * 25.f, 0.f, 0.f, 1.f);
-    glBegin(GL_QUADS);
-    glColor3f(1.f, 0.f, 0.f);
-    glVertex2f(-0.5f, 0.5f);
-    glColor3f(1.f, 1.f, 0.f);
-    glVertex2f(-0.5f, -0.5f);
-    glColor3f(0.f, 1.f, 1.f);
-    glVertex2f(0.5f, -0.5f);
-    glColor3f(0.f, 0.f, 1.f);
-    glVertex2f(0.5f, 0.5f);
-    glEnd();
-}
+        //Divide the width by 64, so whatever our width, 64 squares should fit.
+        int sWidth = this->width / 64;
+
+        //Same with height, but 32.
+        int sHeight = this->height / 32;
+
+        x = x * sWidth;
+        y = y * sHeight;
+
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        glOrtho(0,width,height,0,-1,1);
+        glMatrixMode(GL_MODELVIEW);
+
+        glBegin(GL_QUADS);
+        glVertex2f(x, y);
+        glVertex2f(x+sWidth, y);
+        glVertex2f(x+sWidth, y+sHeight);
+        glVertex2f(x, y+sHeight);
+        glEnd();
+    }

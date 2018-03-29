@@ -44,7 +44,9 @@ public:
     Game(ChipEight * interpreter);
     void InitContext();
     void GameLoop();
-    void DrawSquare();
+    void DrawSprite(int x, int y);
+    void ClearSprite(int x, int y);
+    void ClearScreen();
 
 };
 
