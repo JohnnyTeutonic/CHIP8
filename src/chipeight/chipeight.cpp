@@ -3,19 +3,19 @@
  * @author Kevin Mallinson
  * @version 0.1
  * @section LICENSE
- * 
+ *
  * Copyright (C) 2017 Kevin Mallinson
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -45,7 +45,7 @@ void ChipEight::ParseOpcode()
     //TODO: Implement the switch.
     switch(opNibble)
     {
-        
+
     }
 }
 
@@ -70,3 +70,24 @@ CHDisplay ChipEight::GetDisplay()
 {
     return this->display;
 }
+<<<<<<< Updated upstream
+=======
+
+void ChipEight::return()
+{
+  //uint16_t opcode_return = 0xFFFF;
+  case 0x000e:
+    --stackPointer;
+    programCounter = stack[stackPointer];
+    programCounter+=2;
+    break;
+
+  std::vector<uint16_t> v;
+  v.push_back(programCounter);
+  for (int i =0; i<v.size(); i++){
+    v.pop_back();
+  }
+
+
+}
+>>>>>>> Stashed changes
