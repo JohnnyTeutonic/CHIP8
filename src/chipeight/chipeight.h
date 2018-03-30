@@ -44,6 +44,7 @@ public:
     ChipEight(bool verbose);
 
     void ClearScreen_00E0();
+    void Unused_0NNN(); //Only implementing in case we need it eventually
 
     CHDisplay GetDisplay();
 
@@ -92,6 +93,12 @@ private:
     //The chip8 supports a 64x32 pixel display - and from what I've read a single byte is used to represent a sprite.
     //(A single sprite is 8 pixels wide)
     CHDisplay display;
+
+    //The program counter (PC) should be 16-bit, and is used to store the currently executing address. 
+    uint16_t programCounter;
+
+    //The stack pointer (SP) can be 8-bit, it is used to point to the topmost level of the stack.
+    uint8_t stackPointer;
 
     //Since we only have 35 opcodes, we're going to 'fudge' it by wrapping the parsing in a switch statement.
     //If we were working on e.g. the Intel 8080, this would be pretty messy and we might want to consider something like function pointers instead.

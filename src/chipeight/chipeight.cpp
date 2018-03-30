@@ -45,7 +45,7 @@ void ChipEight::ParseOpcode()
     //TODO: Implement the switch.
     switch(opNibble)
     {
-
+        
     }
 }
 
@@ -59,6 +59,11 @@ void ChipEight::ClearScreen_00E0()
             this->display.display[i][j] = 0;
         }
     }
+}
+
+void ChipEight::Unused_0NNN()
+{
+    return;
 }
 
 CHDisplay ChipEight::GetDisplay()
